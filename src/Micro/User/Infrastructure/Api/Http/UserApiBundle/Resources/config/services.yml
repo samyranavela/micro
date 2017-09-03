@@ -1,0 +1,15 @@
+services:
+    micro.user.user_repository:
+        class: Micro\User\Domain\Repository\UserRepository
+
+    micro.user.register_user_handler:
+        class: Micro\User\Application\Command\RegisterUserHandler
+        public: true
+        arguments:
+            - '@micro.user.user_repository'
+        tags:
+            - { name: tactician.handler, command: Foo\User\RegisterUserCommand }
+
+    Micro\User\Domain\Repository\UserRepository: '@micro.user.user_repository'
+
+    League\Tactician\CommandBus: '@tactician.commandbus'

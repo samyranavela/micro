@@ -1,0 +1,24 @@
+api_user_list:
+    path:     /
+    defaults: { _controller: UserApiBundle:UserApi:index }
+    methods: [GET]
+
+api_user_show:
+    path:     /{uuid}
+    defaults: { _controller: UserApiBundle:UserApi:show }
+    methods: [GET]
+
+api_user_register:
+    path:     /register
+    defaults: { _controller: UserApiBundle:UserApi:register }
+    methods: [POST]
+
+api_user_authenticate:
+    path:     /authenticate
+    defaults: { _controller: UserApiBundle:UserApi:authenticate }
+    methods: [POST]
+
+api_user_delete:
+    path:     /delete/{uuid}
+    defaults: { _controller: UserApiBundle:UserApi:delete }
+    methods: [DELETE]
