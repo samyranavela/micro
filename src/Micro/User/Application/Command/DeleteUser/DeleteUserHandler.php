@@ -1,6 +1,6 @@
 <?php
 
-namespace Micro\User\Application\Command;
+namespace Micro\User\Application\Command\DeleteUser;
 
 use Micro\User\Domain\Repository\UserRepository;
 
@@ -28,9 +28,9 @@ class DeleteUserHandler
     }
 
     /**
-     * @param \Micro\User\Application\Command\DeleteUserCommand $command
+     * @param \Micro\User\Application\Command\DeleteUser\DeleteUser $command
      */
-    public function handle(DeleteUserCommand $command)
+    public function handle(DeleteUser $command)
     {
         $this->userRepository->delete($command->getUuid());
     }
