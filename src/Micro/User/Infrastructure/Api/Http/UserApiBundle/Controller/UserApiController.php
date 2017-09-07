@@ -3,8 +3,8 @@
 namespace UserApiBundle\Controller;
 
 use League\Tactician\CommandBus;
-use Micro\User\Application\Command\DeleteUserCommand;
-use Micro\User\Application\Command\RegisterUserCommand;
+use Micro\User\Application\Command\DeleteUser\DeleteUserFromRequest;
+use Micro\User\Application\Command\RegisterUser\RegisterUserFromRequest;
 use Micro\User\Domain\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -71,7 +71,7 @@ class UserApiController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $command = new RegisterUserCommand($request->get('login'), $request->getPassword());
+        $command = new RegisterUserFromRequest($request);
 
         return new JsonResponse(['uuid' => $command->getUuid()], '201');
     }
@@ -83,8 +83,7 @@ class UserApiController extends Controller
      */
     public function authenticateAction(Request $request)
     {
-        $command = new RegisterUserCommand($request->get('login'), $request->getPassword());
-        $this->commandBus->handle($command);
+        //@todo Authentication
 
         return new JsonResponse();
     }
@@ -97,7 +96,7 @@ class UserApiController extends Controller
      */
     public function deleteAction($uuid, Request $request)
     {
-        $command = new DeleteUserCommand($uuid);
+        $command = new DeleteUserFromRequest($request);
         $this->commandBus->handle($command);
 
         return new JsonResponse([$uuid]);

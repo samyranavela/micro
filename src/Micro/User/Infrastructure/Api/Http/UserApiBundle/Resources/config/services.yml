@@ -3,12 +3,20 @@ services:
         class: Micro\User\Domain\Repository\UserRepository
 
     micro.user.register_user_handler:
-        class: Micro\User\Application\Command\RegisterUserHandler
+        class: Micro\User\Application\Command\RegisterUser\RegisterUserHandler
         public: true
         arguments:
             - '@micro.user.user_repository'
         tags:
-            - { name: tactician.handler, command: Foo\User\RegisterUserCommand }
+            - { name: tactician.handler, command: Micro\User\Application\Command\RegisterUser\RegisterUserCommand }
+
+    micro.user.delete_user_handler:
+        class: Micro\User\Application\Command\DeleteUser\DeleteUserHandler
+        public: true
+        arguments:
+            - '@micro.user.user_repository'
+        tags:
+            - { name: tactician.handler, command: Micro\User\Application\Command\DeleteUser\DeleteUserCommand }
 
     Micro\User\Domain\Repository\UserRepository: '@micro.user.user_repository'
 

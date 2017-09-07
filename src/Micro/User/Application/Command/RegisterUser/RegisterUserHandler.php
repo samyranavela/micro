@@ -1,6 +1,6 @@
 <?php
 
-namespace Micro\User\Application\Command;
+namespace Micro\User\Application\Command\RegisterUser;
 
 use Micro\User\Domain\Model\User;
 use Micro\User\Domain\Repository\UserRepository;
@@ -29,9 +29,9 @@ class RegisterUserHandler
     }
 
     /**
-     * @param \Micro\User\Application\Command\RegisterUserCommand $command
+     * @param \Micro\User\Application\Command\RegisterUser\RegisterUser $command
      */
-    public function handle(RegisterUserCommand $command)
+    public function handle(RegisterUser $command)
     {
         $user = new User($command->getUuid(), $command->getLogin(), $command->getPassword());
         $this->userRepository->persist($user);
